@@ -1,0 +1,27 @@
+{
+  "name": "react-router-redux-dom-link",
+  "version": "0.1.0",
+  "description": "react-router-dom's Link component equivalent for react-router-redux",
+  "main": "lib/Link.js",
+  "repository": "https://github.com/Fahrradflucht/react-router-redux-dom-link.git",
+  "author": "Mathis Wiehl (Fahrradflucht) <mail@mathiswiehl.de>",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "compile": "tsc"
+  },
+  "devDependencies": {
+    "@types/react": "^15.0.23",
+    "@types/react-redux": "^4.4.40",
+    "@types/react-router-redux": "^5.0.0",
+    "typescript": "^2.3.2"
+  },
+  "peerDependencies": {
+    "react": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.6.0"
+  }
+}
