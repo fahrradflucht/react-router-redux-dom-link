@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "description": "react-router-dom's Link component equivalent for react-router-redux",
   "main": "lib/Link.js",
+  "typings": "lib/Link.d.ts",
   "repository": "https://github.com/Fahrradflucht/react-router-redux-dom-link.git",
   "author": "Mathis Wiehl (Fahrradflucht) <mail@mathiswiehl.de>",
   "license": "MIT",
