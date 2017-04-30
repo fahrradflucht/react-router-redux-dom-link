@@ -1,6 +1,6 @@
 {
   "name": "react-router-redux-dom-link",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "react-router-dom's Link component equivalent for react-router-redux",
   "main": "lib/Link.js",
   "repository": "https://github.com/Fahrradflucht/react-router-redux-dom-link.git",
