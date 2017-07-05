@@ -108,7 +108,7 @@ filtering. If you need a property that isn't supported. Feel free to PR.
     import Link from 'react-router-redux-dom-link'
 
     export default const AboutLinkComponent () => (
-        <Link to="/about" replace className='navLink'>This link replaces the current URL</Link>
+        <Link to="/about" className='navLink'>About</Link>
     )
     ```  
     

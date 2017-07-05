@@ -15,11 +15,11 @@ interface LinkDispatchProps {
 }
 
 export interface LinkOwnProps {
+  className?: string;
   onClick?: (e?: React.MouseEvent<HTMLAnchorElement>) => void;
   replace?: boolean;
   target?: string;
   to: string;
-  className: string;
 }
 
 type LinkProps = LinkDispatchProps & LinkOwnProps;
@@ -59,9 +59,9 @@ class Link extends React.Component<LinkProps, undefined> {
 
   public render(): JSX.Element {
     return (
-      <a href={this.props.to}
+      <a className={this.props.className}>
+         href={this.props.to}
          onClick={this.handleClick}
-         className={this.props.className}>
         {this.props.children}
       </a>
     );
