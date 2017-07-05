@@ -19,6 +19,7 @@ export interface LinkOwnProps {
   replace?: boolean;
   target?: string;
   to: string;
+  className: string;
 }
 
 type LinkProps = LinkDispatchProps & LinkOwnProps;
@@ -57,7 +58,13 @@ class Link extends React.Component<LinkProps, undefined> {
   }
 
   public render(): JSX.Element {
-    return <a href={this.props.to} onClick={this.handleClick}>{this.props.children}</a>;
+    return (
+      <a href={this.props.to}
+         onClick={this.handleClick}
+         className={this.props.className}>
+        {this.props.children}
+      </a>
+    );
   }
 }
 
