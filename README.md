@@ -100,6 +100,18 @@ filtering. If you need a property that isn't supported. Feel free to PR.
                     history. If handled by the browser this path will be handled
                     like if you had provided it to the `href` attribute.
 
+* **className**  
+    *Type:*         `string`  
+    *Description:*  A css className to assign to the link.  This allows styling of the link
+    *Example*:
+    ```JSX
+    import Link from 'react-router-redux-dom-link'
+
+    export default const AboutLinkComponent () => (
+        <Link to="/about" className="navLink">About</Link>
+    )
+    ```  
+    
 ## Contribute
 
 PRs welcome.
