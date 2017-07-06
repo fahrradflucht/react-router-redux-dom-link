@@ -59,9 +59,11 @@ class Link extends React.Component<LinkProps, undefined> {
 
   public render(): JSX.Element {
     return (
-      <a className={this.props.className}>
-         href={this.props.to}
-         onClick={this.handleClick}
+      <a
+        className={this.props.className}
+        href={this.props.to}
+        onClick={this.handleClick}
+      >
         {this.props.children}
       </a>
     );
