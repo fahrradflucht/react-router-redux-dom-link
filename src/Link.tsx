@@ -1,44 +1,65 @@
+import {LocationDescriptor} from 'history';
+import * as invariant from 'invariant';
+import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import {
   push as pushActionCreator,
   replace as replaceActionCreator,
 } from 'react-router-redux';
-import { bindActionCreators, Dispatch } from 'redux';
 
 const isModifiedEvent = (event: React.MouseEvent<HTMLAnchorElement>) =>
   !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 
 interface LinkDispatchProps {
-  pushUrl: (location: string) => void;
-  replaceUrl: (location: string) => void;
+  pushUrl: typeof pushActionCreator;
+  replaceUrl: typeof pushActionCreator;
 }
 
-export interface LinkOwnProps {
-  className?: string;
-  onClick?: (e?: React.MouseEvent<HTMLAnchorElement>) => void;
+export interface LinkOwnProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  innerRef?: React.Ref<HTMLAnchorElement>;
   replace?: boolean;
-  target?: string;
-  to: string;
+  to: LocationDescriptor;
 }
 
 type LinkProps = LinkDispatchProps & LinkOwnProps;
 
-class Link extends React.Component<LinkProps, undefined> {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  public static defaultProps: Partial<LinkOwnProps> = {
+class Link extends React.Component<LinkProps> {
+  public static defaultProps = {
     replace: false,
   };
 
-  private handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
+  public static propTypes = {
+    onClick: PropTypes.func,
+    target: PropTypes.string,
+    replace: PropTypes.bool,
+    to: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ]).isRequired,
+    innerRef: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func
+    ])
+  };
+
+  public static contextTypes = {
+    router: PropTypes.shape({
+      history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+        replace: PropTypes.func.isRequired,
+        createHref: PropTypes.func.isRequired
+      }).isRequired
+    }).isRequired
+  };
+
+  private handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const { onClick, target } = this.props;
+
     if (onClick) {
       onClick(e);
     }
+
     if (
       !e.defaultPrevented && // onClick prevented default
       e.button === 0 &&      // ignore right clicks
@@ -55,24 +76,35 @@ class Link extends React.Component<LinkProps, undefined> {
         pushUrl(to);
       }
     }
-  }
+  };
 
   public render(): JSX.Element {
-    return (
-      <a
-        className={this.props.className}
-        href={this.props.to}
-        onClick={this.handleClick}
-      >
-        {this.props.children}
-      </a>
+    const {
+      innerRef,
+      pushUrl,
+      replace,
+      replaceUrl,
+      to,
+      ...props
+    } = this.props;
+
+    invariant(
+      this.context.router,
+      'You should not use <Link> outside a <Router>'
     );
+
+    const href = this.context.router.history.createHref(
+      typeof to === 'string' ? { pathname: to } : to
+    );
+
+    return <a {...props} onClick={this.handleClick} href={href} ref={innerRef}/>
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<any>): LinkDispatchProps => bindActionCreators({
-  pushUrl: pushActionCreator,
-  replaceUrl: replaceActionCreator,
-}, dispatch);
-
-export default connect<undefined, LinkDispatchProps, LinkOwnProps>(undefined, mapDispatchToProps)(Link);
+export default connect<undefined, LinkDispatchProps, LinkOwnProps>(
+  undefined,
+  {
+    pushUrl: pushActionCreator,
+    replaceUrl: replaceActionCreator,
+  }
+)(Link);
