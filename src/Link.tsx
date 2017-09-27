@@ -13,7 +13,7 @@ const isModifiedEvent = (event: React.MouseEvent<HTMLAnchorElement>) =>
 
 interface LinkDispatchProps {
   pushUrl: typeof pushActionCreator;
-  replaceUrl: typeof pushActionCreator;
+  replaceUrl: typeof replaceActionCreator;
 }
 
 export interface LinkOwnProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
