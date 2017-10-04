@@ -1,4 +1,4 @@
-import {LocationDescriptor} from 'history';
+import { LocationDescriptor } from 'history';
 import * as invariant from 'invariant';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
