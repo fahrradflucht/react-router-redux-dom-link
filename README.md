@@ -39,59 +39,21 @@ export default const AboutLinkComponent () => (
 ```
 
 ## API
+**Note**: You could use all `HTMLAnchorElement` properties along with specific `Link` properties as well.
 
-Note that divergant from the API of `react-router-dom`'s `Link` component this
-Library doesn't spread your props down to the `HTMLAnchorElement` without
-filtering. If you need a property that isn't supported. Feel free to PR.
-
-#### Properties:
-* **onClick**  
-    *Type*:         `(e?: React.MouseEvent<HTMLAnchorElement>) => void`  
-    *Description*:  Callback that gets called when the Element is clicked. If
-                    you call `e.preventDefault` the push/replace action won't
-                    be triggert.  
-    *Example*:  
-    ```JSX
-    import Link from 'react-router-redux-dom-link'
-
-    export default class AboutLinkComponent extends React.Component {
-        constructor() {
-            super();
-            this.handleClick = this.handleClick.bind(this);
-        }
-
-        handleClick(e) {
-            if(this.props.unsafedContent) {
-                e.preventDefault();
-                alert('Please save your content first!');
-            }
-        }
-
-        render() {
-            return (
-                <Link to="/about" onClick={this.handleClick}>
-                    Your a-tag content
-                </Link>);
-        }
-    }
-    ```  
 * **replace**  
     *Type*:         `boolean`  
     *Default:*      `false`  
     *Description*:  Whether to push or replace the url provided to `to` in the
                     browser history.  
     *Example*:
-    ```JSX
+    ```jsx
     import Link from 'react-router-redux-dom-link'
 
     export default const AboutLinkComponent () => (
         <Link to="/about" replace>This link replaces the current URL</Link>
     )
-    ```  
-* **target**  
-    *Type*:         `string`  
-    *Description*:  Just your [standard](https://html.spec.whatwg.org/multipage/semantics.html#attr-hyperlink-target)
-                    HTMLAnchorElement `target` attribute.
+    ```
 
 * **to**  
     *Type:*         `string`  
@@ -100,18 +62,44 @@ filtering. If you need a property that isn't supported. Feel free to PR.
                     history. If handled by the browser this path will be handled
                     like if you had provided it to the `href` attribute.
 
-* **className**  
-    *Type:*         `string`  
-    *Description:*  A css className to assign to the link.  This allows styling of the link
     *Example*:
-    ```JSX
+    ```jsx
     import Link from 'react-router-redux-dom-link'
 
     export default const AboutLinkComponent () => (
-        <Link to="/about" className="navLink">About</Link>
+        <Link to="/about">Simple link</Link>
     )
     ```  
+
+    or
+
+    *Type:*         `{ hash?: string, pathname?: string, search?: string, state?: any }`  
+    *Description:*   Object that describes the destination path. It can have following properties:  
     
+    * **pathname**: A string representing the path to link to.  
+    * **search**: A string representation of query parameters.  
+    * **hash**: A hash to put in the URL, e.g. `#a-hash`.  
+    * **state**: State to persist to the `location`.  
+                    
+    *Example*:
+    ```jsx
+    import Link from 'react-router-redux-dom-link'
+
+    export default const UserLinkComponent () => (
+        <Link 
+            to={{
+                pathname: '/users',
+                search: '?sort=name',
+                hash: '#the-hash',
+                state: { fromDashboard: true }
+            }}
+        >
+            User link
+        </Link>
+    )
+    ```
+    
+
 ## Contribute
 
 PRs welcome.
