@@ -47,13 +47,14 @@ export default const AboutLinkComponent () => (
     *Description*:  Whether to push or replace the url provided to `to` in the
                     browser history.  
     *Example*:
-    ```JSX
+    ```jsx
     import Link from 'react-router-redux-dom-link'
 
     export default const AboutLinkComponent () => (
         <Link to="/about" replace>This link replaces the current URL</Link>
     )
-    ```  
+    ```
+
 * **to**  
     *Type:*         `string`  
     *Description:*  The destination path of the Link. If handled by component the
@@ -62,16 +63,18 @@ export default const AboutLinkComponent () => (
                     like if you had provided it to the `href` attribute.
 
     *Example*:
-    ```JSX
+    ```jsx
     import Link from 'react-router-redux-dom-link'
 
     export default const AboutLinkComponent () => (
         <Link to="/about">Simple link</Link>
     )
     ```  
-* **to**
+
+    or
+
     *Type:*         `{ hash?: string, pathname?: string, search?: string, state?: any }`  
-    *Description*   Object that describes the destination path. It can have following properties:  
+    *Description:*   Object that describes the destination path. It can have following properties:  
     
     * **pathname**: A string representing the path to link to.  
     * **search**: A string representation of query parameters.  
