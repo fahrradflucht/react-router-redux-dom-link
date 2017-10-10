@@ -79,15 +79,17 @@ export default const AboutLinkComponent () => (
     * **state**: State to persist to the `location`.  
                     
     *Example*:
-    ```JSX
+    ```jsx
     import Link from 'react-router-redux-dom-link'
 
     export default const UserLinkComponent () => (
         <Link 
-            pathname: '/users',
-            search: '?sort=name',
-            hash: '#the-hash',
-            state: { fromDashboard: true }
+            to={{
+                pathname: '/users',
+                search: '?sort=name',
+                hash: '#the-hash',
+                state: { fromDashboard: true }
+            }}
         >
             User link
         </Link>
